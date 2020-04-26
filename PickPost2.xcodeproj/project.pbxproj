@@ -3,10 +3,18 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		493A7BD92453DD0A00E5B501 /* Line.swift in Sources */ = {isa = PBXBuildFile; fileRef = 493A7BD82453DD0A00E5B501 /* Line.swift */; };
+		493A7BDB2453DEF900E5B501 /* Lines.swift in Sources */ = {isa = PBXBuildFile; fileRef = 493A7BDA2453DEF900E5B501 /* Lines.swift */; };
+		493A7BDD2453DF8500E5B501 /* PickPostData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 493A7BDC2453DF8500E5B501 /* PickPostData.swift */; };
+		493A7BDF2453E05A00E5B501 /* APIKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 493A7BDE2453E05A00E5B501 /* APIKeys.swift */; };
+		493A7BE12453E27000E5B501 /* PickPost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 493A7BE02453E27000E5B501 /* PickPost.swift */; };
+		493A7BE32453ECF600E5B501 /* PickPosts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 493A7BE22453ECF600E5B501 /* PickPosts.swift */; };
+		493A7BE72453F6BC00E5B501 /* PickPostDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 493A7BE62453F6BC00E5B501 /* PickPostDetailViewController.swift */; };
+		493A7BEB2453FE9300E5B501 /* PickPostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 493A7BEA2453FE9200E5B501 /* PickPostTableViewCell.swift */; };
 		498CDEA924535D4300EE8A03 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 498CDEA824535D4300EE8A03 /* AppDelegate.swift */; };
 		498CDEAB24535D4300EE8A03 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 498CDEAA24535D4300EE8A03 /* SceneDelegate.swift */; };
 		498CDEAD24535D4300EE8A03 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 498CDEAC24535D4300EE8A03 /* ViewController.swift */; };
@@ -15,6 +23,15 @@
 		498CDEB524535D4700EE8A03 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 498CDEB324535D4700EE8A03 /* LaunchScreen.storyboard */; };
 		498CDEC024535D4700EE8A03 /* PickPost2Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 498CDEBF24535D4700EE8A03 /* PickPost2Tests.swift */; };
 		498CDECB24535D4700EE8A03 /* PickPost2UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 498CDECA24535D4700EE8A03 /* PickPost2UITests.swift */; };
+		498CDED924535EAF00EE8A03 /* TextPostFeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 498CDED824535EAF00EE8A03 /* TextPostFeedViewController.swift */; };
+		498CDEDB2453608B00EE8A03 /* PickPostFeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 498CDEDA2453608B00EE8A03 /* PickPostFeedViewController.swift */; };
+		49CF8243245371A1002FB640 /* TextPostData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49CF8242245371A1002FB640 /* TextPostData.swift */; };
+		49CF8245245372C1002FB640 /* TextPosts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49CF8244245372C1002FB640 /* TextPosts.swift */; };
+		49CF8247245374A6002FB640 /* TextPost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49CF8246245374A6002FB640 /* TextPost.swift */; };
+		49CF82492453AAB3002FB640 /* TextPostDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49CF82482453AAB3002FB640 /* TextPostDetailViewController.swift */; };
+		49CF824F2453B5F5002FB640 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 49CF824E2453B5F5002FB640 /* GoogleService-Info.plist */; };
+		49CF82512453BE6E002FB640 /* TextPostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49CF82502453BE6E002FB640 /* TextPostTableViewCell.swift */; };
+		9B8B32DDAF62424D88741266 /* Pods_PickPost2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6BABEE018996D7D5BBC6744E /* Pods_PickPost2.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,6 +52,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		325265F2B3FD33C56FFDF2FB /* Pods-PickPost2.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PickPost2.debug.xcconfig"; path = "Target Support Files/Pods-PickPost2/Pods-PickPost2.debug.xcconfig"; sourceTree = "<group>"; };
+		493A7BD82453DD0A00E5B501 /* Line.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Line.swift; sourceTree = "<group>"; };
+		493A7BDA2453DEF900E5B501 /* Lines.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lines.swift; sourceTree = "<group>"; };
+		493A7BDC2453DF8500E5B501 /* PickPostData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickPostData.swift; sourceTree = "<group>"; };
+		493A7BDE2453E05A00E5B501 /* APIKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKeys.swift; sourceTree = "<group>"; };
+		493A7BE02453E27000E5B501 /* PickPost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickPost.swift; sourceTree = "<group>"; };
+		493A7BE22453ECF600E5B501 /* PickPosts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickPosts.swift; sourceTree = "<group>"; };
+		493A7BE62453F6BC00E5B501 /* PickPostDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickPostDetailViewController.swift; sourceTree = "<group>"; };
+		493A7BEA2453FE9200E5B501 /* PickPostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickPostTableViewCell.swift; sourceTree = "<group>"; };
 		498CDEA524535D4300EE8A03 /* PickPost2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PickPost2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		498CDEA824535D4300EE8A03 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		498CDEAA24535D4300EE8A03 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -49,6 +75,16 @@
 		498CDEC624535D4700EE8A03 /* PickPost2UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PickPost2UITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		498CDECA24535D4700EE8A03 /* PickPost2UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickPost2UITests.swift; sourceTree = "<group>"; };
 		498CDECC24535D4700EE8A03 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		498CDED824535EAF00EE8A03 /* TextPostFeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextPostFeedViewController.swift; sourceTree = "<group>"; };
+		498CDEDA2453608B00EE8A03 /* PickPostFeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickPostFeedViewController.swift; sourceTree = "<group>"; };
+		49CF8242245371A1002FB640 /* TextPostData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextPostData.swift; sourceTree = "<group>"; };
+		49CF8244245372C1002FB640 /* TextPosts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextPosts.swift; sourceTree = "<group>"; };
+		49CF8246245374A6002FB640 /* TextPost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextPost.swift; sourceTree = "<group>"; };
+		49CF82482453AAB3002FB640 /* TextPostDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextPostDetailViewController.swift; sourceTree = "<group>"; };
+		49CF824E2453B5F5002FB640 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		49CF82502453BE6E002FB640 /* TextPostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextPostTableViewCell.swift; sourceTree = "<group>"; };
+		6BABEE018996D7D5BBC6744E /* Pods_PickPost2.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PickPost2.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		767A895AA595A9AB973B2B20 /* Pods-PickPost2.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PickPost2.release.xcconfig"; path = "Target Support Files/Pods-PickPost2/Pods-PickPost2.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +92,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9B8B32DDAF62424D88741266 /* Pods_PickPost2.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -76,6 +113,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		463BF74B6C70283722FB2005 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				6BABEE018996D7D5BBC6744E /* Pods_PickPost2.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		498CDE9C24535D4300EE8A03 = {
 			isa = PBXGroup;
 			children = (
@@ -83,6 +128,8 @@
 				498CDEBE24535D4700EE8A03 /* PickPost2Tests */,
 				498CDEC924535D4700EE8A03 /* PickPost2UITests */,
 				498CDEA624535D4300EE8A03 /* Products */,
+				4EB7FC2EA24F0926D3ACAAAF /* Pods */,
+				463BF74B6C70283722FB2005 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -103,7 +150,23 @@
 				498CDEAA24535D4300EE8A03 /* SceneDelegate.swift */,
 				498CDEAC24535D4300EE8A03 /* ViewController.swift */,
 				498CDEAE24535D4300EE8A03 /* Main.storyboard */,
+				49CF82482453AAB3002FB640 /* TextPostDetailViewController.swift */,
+				498CDEDA2453608B00EE8A03 /* PickPostFeedViewController.swift */,
+				493A7BE62453F6BC00E5B501 /* PickPostDetailViewController.swift */,
+				498CDED824535EAF00EE8A03 /* TextPostFeedViewController.swift */,
+				49CF8242245371A1002FB640 /* TextPostData.swift */,
+				49CF82502453BE6E002FB640 /* TextPostTableViewCell.swift */,
+				493A7BD82453DD0A00E5B501 /* Line.swift */,
+				493A7BDA2453DEF900E5B501 /* Lines.swift */,
+				493A7BE02453E27000E5B501 /* PickPost.swift */,
+				493A7BE22453ECF600E5B501 /* PickPosts.swift */,
+				493A7BDC2453DF8500E5B501 /* PickPostData.swift */,
+				493A7BEA2453FE9200E5B501 /* PickPostTableViewCell.swift */,
+				493A7BDE2453E05A00E5B501 /* APIKeys.swift */,
+				49CF8244245372C1002FB640 /* TextPosts.swift */,
+				49CF8246245374A6002FB640 /* TextPost.swift */,
 				498CDEB124535D4700EE8A03 /* Assets.xcassets */,
+				49CF824E2453B5F5002FB640 /* GoogleService-Info.plist */,
 				498CDEB324535D4700EE8A03 /* LaunchScreen.storyboard */,
 				498CDEB624535D4700EE8A03 /* Info.plist */,
 			);
@@ -128,6 +191,15 @@
 			path = PickPost2UITests;
 			sourceTree = "<group>";
 		};
+		4EB7FC2EA24F0926D3ACAAAF /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				325265F2B3FD33C56FFDF2FB /* Pods-PickPost2.debug.xcconfig */,
+				767A895AA595A9AB973B2B20 /* Pods-PickPost2.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -135,9 +207,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 498CDECF24535D4700EE8A03 /* Build configuration list for PBXNativeTarget "PickPost2" */;
 			buildPhases = (
+				519CDF5FD7BD70196D4C7B88 /* [CP] Check Pods Manifest.lock */,
 				498CDEA124535D4300EE8A03 /* Sources */,
 				498CDEA224535D4300EE8A03 /* Frameworks */,
 				498CDEA324535D4300EE8A03 /* Resources */,
+				D365D552C13EF8C67BE3A64D /* [CP] Embed Pods Frameworks */,
+				97DF7E54FFC84CDC92641651 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -233,6 +308,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				498CDEB524535D4700EE8A03 /* LaunchScreen.storyboard in Resources */,
+				49CF824F2453B5F5002FB640 /* GoogleService-Info.plist in Resources */,
 				498CDEB224535D4700EE8A03 /* Assets.xcassets in Resources */,
 				498CDEB024535D4300EE8A03 /* Main.storyboard in Resources */,
 			);
@@ -254,14 +330,88 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		519CDF5FD7BD70196D4C7B88 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-PickPost2-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		97DF7E54FFC84CDC92641651 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-PickPost2/Pods-PickPost2-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-PickPost2/Pods-PickPost2-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-PickPost2/Pods-PickPost2-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D365D552C13EF8C67BE3A64D /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-PickPost2/Pods-PickPost2-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-PickPost2/Pods-PickPost2-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-PickPost2/Pods-PickPost2-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		498CDEA124535D4300EE8A03 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				49CF8245245372C1002FB640 /* TextPosts.swift in Sources */,
+				49CF8243245371A1002FB640 /* TextPostData.swift in Sources */,
+				493A7BEB2453FE9300E5B501 /* PickPostTableViewCell.swift in Sources */,
+				493A7BE12453E27000E5B501 /* PickPost.swift in Sources */,
+				493A7BDF2453E05A00E5B501 /* APIKeys.swift in Sources */,
+				49CF82512453BE6E002FB640 /* TextPostTableViewCell.swift in Sources */,
+				49CF8247245374A6002FB640 /* TextPost.swift in Sources */,
+				498CDEDB2453608B00EE8A03 /* PickPostFeedViewController.swift in Sources */,
+				493A7BE72453F6BC00E5B501 /* PickPostDetailViewController.swift in Sources */,
+				493A7BDB2453DEF900E5B501 /* Lines.swift in Sources */,
 				498CDEAD24535D4300EE8A03 /* ViewController.swift in Sources */,
 				498CDEA924535D4300EE8A03 /* AppDelegate.swift in Sources */,
+				493A7BE32453ECF600E5B501 /* PickPosts.swift in Sources */,
+				498CDED924535EAF00EE8A03 /* TextPostFeedViewController.swift in Sources */,
+				49CF82492453AAB3002FB640 /* TextPostDetailViewController.swift in Sources */,
+				493A7BD92453DD0A00E5B501 /* Line.swift in Sources */,
 				498CDEAB24535D4300EE8A03 /* SceneDelegate.swift in Sources */,
+				493A7BDD2453DF8500E5B501 /* PickPostData.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -432,6 +582,7 @@
 		};
 		498CDED024535D4700EE8A03 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 325265F2B3FD33C56FFDF2FB /* Pods-PickPost2.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -441,7 +592,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.PatrickMcDonough.PickPost2;
+				PRODUCT_BUNDLE_IDENTIFIER = com.PatrickMcDonough.PickTalk2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -450,6 +601,7 @@
 		};
 		498CDED124535D4700EE8A03 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 767A895AA595A9AB973B2B20 /* Pods-PickPost2.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -459,7 +611,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.PatrickMcDonough.PickPost2;
+				PRODUCT_BUNDLE_IDENTIFIER = com.PatrickMcDonough.PickPos;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
