@@ -12,16 +12,30 @@ import Firebase
 import FirebaseUI
 import GoogleSignIn
 
-class TextPostFeedViewController: UIViewController, FUIAuthDelegate {
+class TextPostFeedViewController: UIViewController, FUIAuthDelegate, UIPageViewControllerDelegate {
+    private var pageViewController: UIPageViewController!
+    private lazy var viewControllers: [UIViewController] = {
+    var viewControllers = [UIViewController]()
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let firstIntroViewController = storyboard.instantiateViewController(withIdentifier: "TextPostVC")
+        let secondIntroViewController = storyboard.instantiateViewController(withIdentifier: "PickPostVC")
+    viewControllers.append(firstIntroViewController)
+    viewControllers.append(secondIntroViewController)
+    return viewControllers
+    }()
     var textPosts = TextPosts()
     var textPostHolder: [String] = []
     @IBOutlet weak var textFeedTableView: UITableView!
+    var today: String!
+    var time: String!
     var textPostArray: [TextPostData] = []
        var textPost: TextPost!
         var authUI: FUIAuth!
     var addingTextPost: TextPostData!
       //Do I need this? Maybe not with Posts?
     @IBOutlet weak var sortSegmentControl: UISegmentedControl!
+
+    @IBOutlet weak var myPageControl: UIPageControl!
     
     
     override func viewDidLoad() {
@@ -39,8 +53,12 @@ class TextPostFeedViewController: UIViewController, FUIAuthDelegate {
         print("I am just beofre textposts.load data")
         textPosts.loadData {
             print("I am inside textposts.load data")
-             self.sortBasedOnSegmentPressed()
-             self.textFeedTableView.reloadData()
+            DispatchQueue.main.async {
+                 self.sortBasedOnSegmentPressed()
+                self.textFeedTableView.reloadData()
+            }
+//             self.sortBasedOnSegmentPressed()
+//             self.textFeedTableView.reloadData()
             print("I am about to leave textPosts.loadData")
                 }
         
@@ -74,7 +92,21 @@ class TextPostFeedViewController: UIViewController, FUIAuthDelegate {
           }
       }
       
-      @IBAction func signOutPressed(_ sender: UIBarButtonItem) {
+    
+    
+    
+    @IBAction func swipeHappened(_ sender: UISwipeGestureRecognizer) {
+print("I recognized the swipe")
+        performSegue(withIdentifier: "SwipeToPicks", sender: UISwipeGestureRecognizer())
+//        var vc = PickPostFeedViewController()
+//        self.addChild(vc)
+//        vc.didMove(toParent: self)
+        
+      //  present(PickPostFeedViewController(), animated: true)
+        //pageViewController.setViewControllers([PickPostFeedViewController()], direction: .forward, animated: true, completion: nil)
+  //      pageViewController.setViewControllers([TextPostFeedViewController(),PickPostFeedViewController()], direction: .forward, animated: true, completion: nil)
+    }
+    @IBAction func signOutPressed(_ sender: UIBarButtonItem) {
            do {
                try authUI!.signOut()
                print("**** successfully signed out")
@@ -106,24 +138,75 @@ class TextPostFeedViewController: UIViewController, FUIAuthDelegate {
            textFeedTableView.reloadData()
        }
        
+    
+    
        @IBAction func sortSegmentPressed(_ sender: UISegmentedControl) {
            sortBasedOnSegmentPressed()
        }
-       
+       func getTodayString() -> String{
+
+           let date = Date()
+           let calender = Calendar.current
+           let components = calender.dateComponents([.year,.month,.day,.hour,.minute,.second], from: date)
+
+           let year = components.year
+           let month = components.month
+           let day = components.day
+           let hour = components.hour
+           let minute = components.minute
+           let second = components.second
+
+           let today_string = String(year!) + "-" + String(month!) + "-" + String(day!)
+
+           return today_string
+
+       }
+    
+    
+    func getTimeString() -> String{
+
+           let date = Date()
+           let calender = Calendar.current
+           let components = calender.dateComponents([.hour,.minute,.second], from: date)
+
+           let hour = components.hour
+           let minute = components.minute
+           let second = components.second
+
+           
+        var ampm = ""
+        if hour! < 12 {
+            ampm = " AM"
+        } else {
+            ampm = " PM"
+        }
+        let time_string =  String(hour!)  + ":" + String(minute!) + ampm
+
+           return time_string
+
+       }
+    
+    
     
      @IBAction func unwindFromViewController(segue: UIStoryboardSegue) {
         print("Im got inside the unwind functino!")
-        
+        let senderVC = segue.source as? TextPostDetailViewController
+        if senderVC?.newTextPostText != "" {
+            print("💡💡💡💡💡💡💡💡💡💡💡💡 full post")
+        } else {
+            print("😡😡😡😡😡😡 empty post")
+            return
+        }
         
         if segue.source is TextPostDetailViewController {
                  if let senderVC = segue.source as? TextPostDetailViewController {
                     print("segue.source is indeed textPostDetailVC")
                      textPostHolder.append(senderVC.newTextPostText)
                     print("This is textPostHolder \(textPostHolder)")
-                    addingTextPost = TextPostData(text: senderVC.newTextPostText, time: Date(), username: "fake username 2", upVotes: 0, downVotes: 0, comments: [])
-                   // addingTextPost = TextPostData(text: senderVC.newTextPostText, time: Date(), username: "fake username", upVotes: 0, downVotes: 0, comments: 0)
+                    addingTextPost = TextPostData(text: senderVC.newTextPostText, time: TimeInterval(), postingUserID: "fake username 2", upVotes: 0, downVotes: 0, comments: [])
+                   // addingTextPost = TextPostData(text: senderVC.newTextPostText, time: TimeInterval(), username: "fake username", upVotes: 0, downVotes: 0, comments: 0)
                  //   textPostArray.append(addingTextPost)
-                    textPostArray.insert(addingTextPost, at: 0)
+                    textPostArray.append(addingTextPost)
 
             }
         }
@@ -176,9 +259,71 @@ class TextPostFeedViewController: UIViewController, FUIAuthDelegate {
 //                 //    feedTableView.deselectRow(at: selectedIndexPath, animated: true)
 //               //  }
 //             }
-//      }
-      
-  }
+//
+
+func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    if let vc = segue.destination as? UIPageViewController {
+ pageViewController = vc
+ pageViewController.dataSource = self
+ pageViewController.delegate = self
+pageViewController.setViewControllers([viewControllers[0]], direction: .forward, animated: true, completion: nil)
+ }
+ }
+}
+// MARK: UIPageViewControllerDataSource
+extension TextPostFeedViewController: UIPageViewControllerDataSource {
+    func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
+    guard let viewControllerIndex = viewControllers.index(of: viewController) else {
+ return nil
+ }
+ let previousIndex = viewControllerIndex-1
+ 
+ guard previousIndex >= 0 else {
+ return nil
+ }
+ 
+ guard viewControllers.count > previousIndex else {
+ return nil
+ }
+ return viewControllers[previousIndex]
+ }
+ 
+    func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
+        guard let viewControllerIndex = viewControllers.index(of: viewController) else {
+ return nil
+ }
+ 
+ let nextIndex = viewControllerIndex + 1
+ let viewControllersCount = viewControllers.count
+ 
+ guard viewControllersCount != nextIndex else {
+ return nil
+ }
+ 
+ guard viewControllersCount > nextIndex else {
+ return nil
+ }
+ return viewControllers[nextIndex]
+ }
+}
+
+
+// MARK: UIPageViewControllerDelegate
+extension TextPostFeedViewController {
+ func presentationCountForPageViewController(pageViewController: UIPageViewController) -> Int {
+ return viewControllers.count
+ }
+ 
+ func presentationIndexForPageViewController(pageViewController: UIPageViewController) -> Int {
+ return 0
+ }
+}
+
+
+
+
+
+
 
   extension TextPostFeedViewController: UITableViewDelegate, UITableViewDataSource {
       func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -186,11 +331,21 @@ class TextPostFeedViewController: UIViewController, FUIAuthDelegate {
          return textPostArray.count //AFTER LOADING YOUR POSTS! ❤️❤️❤️❤️❤️
       }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 250
+        return 170
     }
     
       func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        today = getTodayString()
+        time = getTimeString()
               let cell = tableView.dequeueReusableCell(withIdentifier: "TextPostCell", for: indexPath) as! TextPostTableViewCell
+        cell.timeLabel.text = "\(time!)"
+        print("↘️↘️↘️↘️↘️↘️↘️↘️↘️↘️↘️↘️ below is photoURL")
+        print(authUI.auth!.currentUser!.photoURL)
+        cell.usernameLabel.text = "\(authUI.auth!.currentUser!.displayName!)"
+        cell.datePostedLabel.text = "Posted: \(today!)"
+        cell.likeLabelTextPost.text = "\(textPostArray[indexPath.row].upVotes)"
+        cell.dislikeLabelTextPost.text = "\(textPostArray[indexPath.row].downVotes)"
+        print("This is what im trying to st as the username 💯💯💯💯💯💯\(authUI.auth!.currentUser!.displayName!)")
         cell.textPostView.text = textPostArray[indexPath.row].text
        // cell.textLabel?.text = textPostArray[indexPath.row].textPost?.text
         print("I still need to configure the text post cell right here!!?")
@@ -198,7 +353,7 @@ class TextPostFeedViewController: UIViewController, FUIAuthDelegate {
        // cell.configureCell(textPost: TextPost(textPost: TextPost))
        // cell.textLabel?.text = textPostArray[indexPath.row].text
        // cell.usernameLabel ❤️❤️❤️❤️❤️❤️❤️ How do I to put things in proper labels?????
-        print("This is the user username: !!! \(textPostArray[indexPath.row].username)")
+        print("This is the user username: !!! \(textPostArray[indexPath.row].postingUserID)")
         print("Tweet:  \(textPostArray[indexPath.row].text)")
         print("This is the upvotes on the post: !!! \(textPostArray[indexPath.row].upVotes)")
         print("This is the downvotes on the post: !!! \(textPostArray[indexPath.row].downVotes)")

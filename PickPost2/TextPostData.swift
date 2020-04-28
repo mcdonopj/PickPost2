@@ -12,8 +12,8 @@ import UIKit
 struct TextPostData: Codable { //Codable {
     var text: String
     //var specificBet: String
-    var time: Date
-    var username: String
+    var time: TimeInterval
+    var postingUserID: String
     var upVotes: Int
     var downVotes: Int
     var comments: [String] = []

@@ -17,22 +17,54 @@ class PickPostFeedViewController: UIViewController {
     var pickPosts: PickPosts!
       var authUI: FUIAuth!
     var pickPostTextHolder: [String] = []
-    var pickPostArray: [PickPostData] = []
+   // var pickPostArray: [PickPostData] = []
     var addingPickPost: PickPostData!
+    var today: String!
+    var time: String!
+    var lines = Lines()
+   // var pickPostArray = [PickPostData]()
     @IBOutlet weak var sortSegmentControl: UISegmentedControl!
     @IBOutlet weak var pickPostFeedTableView: UITableView!
+    @IBOutlet weak var mysecondpageControl: UIPageControl!
+    
+    var pickPostArray = [PickPostData]() {
+        didSet {
+            DispatchQueue.main.async {
+                self.pickPostFeedTableView.reloadData()
+            }
+        
+        }
+    }
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        mysecondpageControl.currentPage = 1
         authUI = FUIAuth.defaultAuthUI()
               // You need to adopt a FUIAuthDelegate protocol to receive callback
               authUI?.delegate = self
-              pickPostFeedTableView.delegate = self
               pickPostFeedTableView.dataSource = self
+          pickPostFeedTableView.delegate = self
              pickPostFeedTableView.isHidden = true
         print("The table view is hidden here ❤️❤️❤️ ")
         pickPosts = PickPosts()
+        pickPosts.getData {
+            print("💡💡💡💡💡💡💡💡💡💡💡💡💡💡💡💡💡💡💡💡")
+            DispatchQueue.main.async {
+                self.pickPostFeedTableView.reloadData()
+            }
+        }
+        
+//        lines.getData {
+//            print("💡💡💡💡💡💡💡💡💡💡💡💡💡💡💡💡💡💡💡💡")
+//                     DispatchQueue.main.async {
+//                     self.pickPostFeedTableView.reloadData()
+//                     }
+//            print("in viewdidload, this is   linearray: \(self.lines.lineArray)")
+//            print("in viewdidload, this is count of line array: \(self.lines.lineArray.count))")
+//        }
+        updateUserInterface()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -49,7 +81,31 @@ class PickPostFeedViewController: UIViewController {
            signIn()
        }
        
-       func signIn() {
+    func updateUserInterface() {
+        pickPosts.getData {
+           //  print("This is in the get data function.")
+             DispatchQueue.main.async {
+                // dateformatter.timeZone = TimeZone(identifier: self.weatherDetail.timezone)
+                 // dateFormatter.timeZone = TimeZone(identifier: weatherDetail.timezone)
+               //  let usableDate = Date(timeIntervalSince1970: self.weatherDetail.currentTime)
+               //  self.dateLabel.text = dateformatter.string(from: usableDate)
+//                 //  self.dateLabel.text = dateFormatter.string(from: usableDate)
+//                 self.locationLabel.text = self.weatherDetail.name
+//                 self.tempteratureLabel.text = "\(self.weatherDetail.temperature)°"
+//                 self.summaryLabel.text = self.weatherDetail.summary
+//                 self.imageView.image = UIImage(named: self.weatherDetail.dailyIcon)
+//                 self.tableView.reloadData()
+//                 self.collectionView.reloadData()
+             }
+         }
+    }
+    
+    @IBAction func swipeToTexts(_ sender: UISwipeGestureRecognizer) {
+        print("swipe back was recognized 🇭🇰🇭🇰🇭🇰🇭🇰🇭🇰🇭🇰🇭🇰🇭🇰🇭🇰🇭🇰🇭🇰🇭🇰")
+       performSegue(withIdentifier: "SwipeToTexts", sender: UISwipeGestureRecognizer())
+    }
+    
+    func signIn() {
            let providers: [FUIAuthProvider] = [
                FUIGoogleAuth(),
            ]
@@ -63,6 +119,71 @@ class PickPostFeedViewController: UIViewController {
                pickPostFeedTableView.isHidden = false
            }
        }
+    
+//    func getTodayString() -> String{
+//
+//                  let date = Date()
+//                  let calender = Calendar.current
+//                  let components = calender.dateComponents([.year,.month,.day,.hour,.minute,.second], from: date)
+//
+//                  let year = components.year
+//                  let month = components.month
+//                  let day = components.day
+//                  let hour = components.hour
+//                  let minute = components.minute
+//                  let second = components.second
+//
+//                  let today_string = String(year!) + "-" + String(month!) + "-" + String(day!) + " " + String(hour!)  + ":" + String(minute!) + ":" +  String(second!)
+//
+//                  return today_string
+//
+//              }
+//
+//          let today : String!
+//          today = getTodayString()
+     func getTodayString() -> String{
+
+           let date = Date()
+           let calender = Calendar.current
+           let components = calender.dateComponents([.year,.month,.day,.hour,.minute,.second], from: date)
+
+           let year = components.year
+           let month = components.month
+           let day = components.day
+           let hour = components.hour
+           let minute = components.minute
+           let second = components.second
+
+           let today_string = String(year!) + "-" + String(month!) + "-" + String(day!)
+
+           return today_string
+
+       }
+    
+    
+    func getTimeString() -> String{
+
+           let date = Date()
+           let calender = Calendar.current
+           let components = calender.dateComponents([.hour,.minute,.second], from: date)
+
+           let hour = components.hour
+           let minute = components.minute
+           let second = components.second
+
+           
+        var ampm = ""
+        if hour! < 12 {
+            ampm = " AM"
+        } else {
+            ampm = " PM"
+        }
+        let time_string =  String(hour!)  + ":" + String(minute!) + ampm
+
+           return time_string
+
+       }
+    
     
     func sortBasedOnSegmentPressed() {
         switch sortSegmentControl.selectedSegmentIndex {
@@ -118,6 +239,16 @@ class PickPostFeedViewController: UIViewController {
     
     @IBAction func unwindFromViewController(segue: UIStoryboardSegue) {
          print("Im got inside the unwind functino!")
+        
+        if let senderVChelp = segue.source as? PickPostDetailViewController {
+            
+        if senderVChelp.switcher.isOn == false {
+           print("the switchr is false 999!!")
+            return
+        } else {
+            
+         //   }
+    //    }
          
          
          if segue.source is PickPostDetailViewController {
@@ -125,14 +256,23 @@ class PickPostFeedViewController: UIViewController {
                      print("segue.source is indeed PickPostDetailVC")
                       pickPostTextHolder.append(senderVC.newPickPostText)
                      print("This is pickPostHolder \(pickPostTextHolder)")
+                    
+                    if let number = Int(senderVC.amountRiskedField.text ?? "0") {
+                        print("💶💶💶💶💶💶💶💶💶💶This the number here: \(number)")
+                    
+                    
                      //addingPickPost = PickPostData(text: senderVC.newTextPostText, time: Date(), username: "fake username 2", upVotes: 0, downVotes: 0, comments: [])
                     //❤️❤️❤️❤️❤️ Should I add senderVC.newPickPostText as text: instead??????
-                    addingPickPost = PickPostData(text: senderVC.pickPost.text, commenceTime: senderVC.pickPost.commenceTime, timePosted: senderVC.pickPost.timePosted, username: senderVC.pickPost.username, upVotes: senderVC.pickPost.upVotes, downVotes: senderVC.pickPost.downVotes, chosenTeam: senderVC.pickPost.chosenTeam, odds: senderVC.pickPost.odds, amountWagered: senderVC.pickPost.amountWagered, amountToWin: senderVC.pickPost.amountToWin, documentID: senderVC.pickPost.documentID)
+                        addingPickPost = PickPostData(text: senderVC.pickPost.text, commenceTime: senderVC.pickPost.commence_time, timePosted: senderVC.pickPost.timePosted, username: "\(authUI.auth!.currentUser!.displayName!)" /*senderVC.pickPost.username*/, upVotes: senderVC.pickPost.upVotes, downVotes: senderVC.pickPost.downVotes, chosenTeam: senderVC.currentMoneyLine, teams: senderVC.pickPost.teams, odds: senderVC.pickPost.odds, sport: senderVC.pickPost.sport, amountWagered:  number, amountToWin: senderVC.pickPost.amountToWin, documentID: senderVC.pickPost.documentID)
                     // addingTextPost = TextPostData(text: senderVC.newTextPostText, time: Date(), username: "fake username", upVotes: 0, downVotes: 0, comments: 0)
                   //   textPostArray.append(addingTextPost)
                      pickPostArray.insert(addingPickPost, at: 0)
                     print("This is the pick post array now: \(pickPostArray)")
-
+                    
+                    }
+                    
+            } // new
+            } //new
              }
          }
          print("I finished the unwind function!")
@@ -170,9 +310,30 @@ extension PickPostFeedViewController: UITableViewDelegate, UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let time = getTimeString()
+        let today = getTodayString()
         let cell = tableView.dequeueReusableCell(withIdentifier: "PickPostCell", for: indexPath) as! PickPostTableViewCell
         print("Why doesnt is like configure cell? ❤️❤️❤️❤️❤️❤️❤️")
         cell.configureCell(pickPost: pickPosts.allPickPostsArray[indexPath.row])
+        cell.usernameLabel.text = "\(authUI.auth!.currentUser!.displayName!)"
+        cell.chosenTeamLineLabel.text = "Chosen Team -XXX Goes Here"
+        cell.timePostedLabel.text = "\(time)"
+        cell.dateLabel.text = "Posted: \(today)"
+        cell.startTimeLabel.text = "Start time Goes in Here"
+        cell.riskingLabel.text = "Risk Amount: $XXX"
+        cell.toWinLabel.text = "To Win: $YYY"
+        print("🎛🎛🎛🎛🎛🎛🎛🎛 about to post day and time posted")
+        print("This is the username \(pickPostArray[indexPath.row].username)")
+        print("This is the chosen team \(pickPostArray[indexPath.row].chosenTeam)")
+        print("This is the time Posted \(pickPostArray[indexPath.row].timePosted)")
+        print("This is the commence Time \(pickPostArray[indexPath.row].commenceTime)")
+        print("This is the amount wagered \(pickPostArray[indexPath.row].amountWagered)")
+        print("This is the amount to win  \(pickPostArray[indexPath.row].amountToWin)")
+        print("This is the amount agrees \(pickPostArray[indexPath.row].upVotes)")
+        print("This is the amount disagrees \(pickPostArray[indexPath.row].downVotes)")
+        print(today)
+        print(time)
+        
         cell.textLabel?.text = pickPosts.allPickPostsArray[indexPath.row].text
         print("This is the pick post text: \(pickPosts.allPickPostsArray[indexPath.row].text)")
         

@@ -10,16 +10,18 @@ import Foundation
 
 struct PickPostData: Codable { //Codable {
     var text: String
-    var commenceTime: Date
-    var timePosted: Date
+    var commenceTime: TimeInterval
+    var timePosted: TimeInterval
     var username: String
     var upVotes: Int
     var downVotes: Int
     var comments: [String] = []
     var chosenTeam: String
-    var odds: String
-    var amountWagered: Decimal
-    var amountToWin: Decimal
+    var teams: [String] = []
+    var odds: Double
+    var sport: String
+    var amountWagered: Int
+    var amountToWin: Double
     var documentID: String
   //  var userPhoto: UIImage
    // var record: String

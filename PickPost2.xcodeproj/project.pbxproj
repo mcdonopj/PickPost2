@@ -15,6 +15,7 @@
 		493A7BE32453ECF600E5B501 /* PickPosts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 493A7BE22453ECF600E5B501 /* PickPosts.swift */; };
 		493A7BE72453F6BC00E5B501 /* PickPostDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 493A7BE62453F6BC00E5B501 /* PickPostDetailViewController.swift */; };
 		493A7BEB2453FE9300E5B501 /* PickPostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 493A7BEA2453FE9200E5B501 /* PickPostTableViewCell.swift */; };
+		496A4ECF24553E4E00138E90 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 496A4ECE24553E4E00138E90 /* FeedViewController.swift */; };
 		498CDEA924535D4300EE8A03 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 498CDEA824535D4300EE8A03 /* AppDelegate.swift */; };
 		498CDEAB24535D4300EE8A03 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 498CDEAA24535D4300EE8A03 /* SceneDelegate.swift */; };
 		498CDEAD24535D4300EE8A03 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 498CDEAC24535D4300EE8A03 /* ViewController.swift */; };
@@ -61,6 +62,7 @@
 		493A7BE22453ECF600E5B501 /* PickPosts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickPosts.swift; sourceTree = "<group>"; };
 		493A7BE62453F6BC00E5B501 /* PickPostDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickPostDetailViewController.swift; sourceTree = "<group>"; };
 		493A7BEA2453FE9200E5B501 /* PickPostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickPostTableViewCell.swift; sourceTree = "<group>"; };
+		496A4ECE24553E4E00138E90 /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
 		498CDEA524535D4300EE8A03 /* PickPost2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PickPost2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		498CDEA824535D4300EE8A03 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		498CDEAA24535D4300EE8A03 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -150,6 +152,7 @@
 				498CDEAA24535D4300EE8A03 /* SceneDelegate.swift */,
 				498CDEAC24535D4300EE8A03 /* ViewController.swift */,
 				498CDEAE24535D4300EE8A03 /* Main.storyboard */,
+				496A4ECE24553E4E00138E90 /* FeedViewController.swift */,
 				49CF82482453AAB3002FB640 /* TextPostDetailViewController.swift */,
 				498CDEDA2453608B00EE8A03 /* PickPostFeedViewController.swift */,
 				493A7BE62453F6BC00E5B501 /* PickPostDetailViewController.swift */,
@@ -398,6 +401,7 @@
 				49CF8243245371A1002FB640 /* TextPostData.swift in Sources */,
 				493A7BEB2453FE9300E5B501 /* PickPostTableViewCell.swift in Sources */,
 				493A7BE12453E27000E5B501 /* PickPost.swift in Sources */,
+				496A4ECF24553E4E00138E90 /* FeedViewController.swift in Sources */,
 				493A7BDF2453E05A00E5B501 /* APIKeys.swift in Sources */,
 				49CF82512453BE6E002FB640 /* TextPostTableViewCell.swift in Sources */,
 				49CF8247245374A6002FB640 /* TextPost.swift in Sources */,
