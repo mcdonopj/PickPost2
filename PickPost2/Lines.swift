@@ -78,7 +78,7 @@ class Lines  {
                 //print("Here is what you returned \(self.datas)")
                 self.datas = returned.data
                 print("This is datas \(self.datas)")
-                self.lineArray.forEach({print("Teams: \($0.teams), h2h: \($0.h2h)")})
+             //   self.lineArray.forEach({print("Teams: \($0.teams), h2h: \($0.h2h)")})
                   print("🏋🏻‍♀️🏋🏻‍♀️🏋🏻‍♀️🏋🏻‍♀️🏋🏻‍♀️🏋🏻‍♀️🏋🏻‍♀️🏋🏻‍♀️🏋🏻‍♀️🏋🏻‍♀️🏋🏻‍♀️🏋🏻‍♀️🏋🏻‍♀️🏋🏻‍♀️🏋🏻‍♀️🏋🏻‍♀️🏋🏻‍♀️🏋🏻‍♀️🏋🏻‍♀️🏋🏻‍♀️🏋🏻‍♀️🏋🏻‍♀️🏋🏻‍♀️")
                   //let json = try JSONSerialization.jsonObject(with: data!, options: [])
                  // print("nice! json \(json)")

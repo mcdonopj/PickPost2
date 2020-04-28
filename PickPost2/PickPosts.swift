@@ -54,9 +54,9 @@ class PickPosts {
                   //print("Here is what the line array you returned \(Lines.lineArray)")
                     print("Here is details of what your returned now teams: \(returned.teams)")
                     print("Here is details of what your returned now sportNice: \(returned.sport_nice)")
-                    print("Here is details of what your returned now teams: \(returned.h2h)")
-                       print("Here is details of what your returned now away team odds: \(returned.h2h[0])")
-                print("Here is details of what your returned now home team odds: \(returned.h2h[1])")
+                    //print("Here is details of what your returned now teams: \(returned.h2h)")
+                    //   print("Here is details of what your returned now away team odds: \(returned.h2h[0])")
+                //print("Here is details of what your returned now home team odds: \(returned.h2h[1])")
                     print("Here is details of what your returned now commenceTime: \(returned.commence_time)")
                  } catch {
                      print("PickPosts.get Data JSON ERROR \(error.localizedDescription)")

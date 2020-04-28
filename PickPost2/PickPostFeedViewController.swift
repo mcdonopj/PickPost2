@@ -323,14 +323,15 @@ extension PickPostFeedViewController: UITableViewDelegate, UITableViewDataSource
         cell.riskingLabel.text = "Risk Amount: $XXX"
         cell.toWinLabel.text = "To Win: $YYY"
         print("🎛🎛🎛🎛🎛🎛🎛🎛 about to post day and time posted")
-        print("This is the username \(pickPostArray[indexPath.row].username)")
-        print("This is the chosen team \(pickPostArray[indexPath.row].chosenTeam)")
-        print("This is the time Posted \(pickPostArray[indexPath.row].timePosted)")
-        print("This is the commence Time \(pickPostArray[indexPath.row].commenceTime)")
-        print("This is the amount wagered \(pickPostArray[indexPath.row].amountWagered)")
-        print("This is the amount to win  \(pickPostArray[indexPath.row].amountToWin)")
-        print("This is the amount agrees \(pickPostArray[indexPath.row].upVotes)")
-        print("This is the amount disagrees \(pickPostArray[indexPath.row].downVotes)")
+        print("I am commentng out everything below htis because of index range failures for pickPostArray[indexPath.row].username or .whatever")
+//        print("This is the username \(pickPostArray[indexPath.row].username)")
+//        print("This is the chosen team \(pickPostArray[indexPath.row].chosenTeam)")
+//        print("This is the time Posted \(pickPostArray[indexPath.row].timePosted)")
+//        print("This is the commence Time \(pickPostArray[indexPath.row].commenceTime)")
+//        print("This is the amount wagered \(pickPostArray[indexPath.row].amountWagered)")
+//        print("This is the amount to win  \(pickPostArray[indexPath.row].amountToWin)")
+//        print("This is the amount agrees \(pickPostArray[indexPath.row].upVotes)")
+//        print("This is the amount disagrees \(pickPostArray[indexPath.row].downVotes)")
         print(today)
         print(time)
         
