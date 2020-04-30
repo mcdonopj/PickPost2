@@ -519,9 +519,6 @@
                                 <rect key="frame" x="16" y="345" width="118" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Away Team -XXX"/>
-                                <connections>
-                                    <action selector="awayTeamButtonPressed:" destination="iYY-dZ-J2B" eventType="touchUpInside" id="amm-ek-V90"/>
-                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ars-rI-zDv">
                                 <rect key="frame" x="164" y="345" width="124" height="30"/>

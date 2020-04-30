@@ -19,7 +19,9 @@ class Lines  {
      var datas = [Line]()
     
     //var results: [Line] = []
-    var urlString = "https://api.the-odds-api.com/v3/odds/?sport=UPCOMING&region=eu&mkt=h2h&apiKey=21f3240fa00bcfe0a554de3b68c74020"
+    //old //var urlString ="https://api.the-odds-api//.com/v3/odds/?sport=UPCOMING&region=eu&mkt=h2h&apiKey=21f3240fa00bcfe0a554de3b68c74020"
+    var urlString = "https://api.the-odds-api.com/v3/odds/?sport=UPCOMING&region=us&mkt=h2h&apiKey=d71ed9b7c01aadf3e3b885d969634a9c"
+   // var APIkey = d71ed9b7c01aadf3e3b885d969634a9c
     var sites: [String] = []
     var h2h: [Double] = []
     var lineArray: [Line] = []
@@ -47,9 +49,9 @@ class Lines  {
 //      }
     
     
-    func getData(completed: @escaping ()->()) {
+    func getData(completed: @escaping ()->([Line])) {
           print("🏓🏓🏓🏓🏓🏓🏓🏓🏓🏓🏓🏓🏓🏓🏓🏓🏓🏓🏓🏓🏓")
-          let urlString = "https://api.the-odds-api.com/v3/odds/?sport=UPCOMING&region=eu&mkt=h2h&apiKey=21f3240fa00bcfe0a554de3b68c74020"
+          let urlString = "https://api.the-odds-api.com/v3/odds/?sport=UPCOMING&region=us&mkt=h2h&apiKey=d71ed9b7c01aadf3e3b885d969634a9c"
          // let urlString = "https://api.darksky.net/forecast/b94f0875317de54877db4feb06a79295/42.3601,-71.0589"
           print("we are accessing url string \(urlString)")
        
@@ -96,14 +98,14 @@ class Lines  {
                 } catch {
                     print("error: ", error)
                 }
-                
               //  print("look below")
              //   debugPrint(error)
               //   print("JSON ERROR \(error.localizedDescription)")
-            
          completed()
+      
           }
            task.resume()
+//        return self.datas
     }
 
 }

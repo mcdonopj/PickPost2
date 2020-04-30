@@ -9,11 +9,13 @@
 import UIKit
 
 class PickPostDetailViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
-//PickPostsDetailView - same as the TextPostsDetailViewController but for pick posts, you might want to have a picker view in here that you can populate using Lines.getData so the user can pick a line they want to work with then a button at the bottom would save their pick to firebase, you'd do this by creating a PickPost with the information you're
+
     var pickPost = PickPost()
     var pickPostContent = ""
        var newPickPostText = "fake Pick post text"
     var currentMoneyLine = ""
+    var gotLinesArray: [Line] = []
+    var linesWithOdds: [Line] = []
     var lines = Lines()
     @IBOutlet weak var pickerView: UIPickerView!
     @IBOutlet weak var amountToWinField: UITextField!
@@ -29,25 +31,6 @@ class PickPostDetailViewController: UIViewController, UIPickerViewDelegate, UIPi
     
     
     @IBOutlet weak var switcher: UISwitch!
-    //    var amountToWinInt = Decimal(amountToWinField.text) ?? 0.00
-//    var amountRiskedInt = Decimal(amountRiskedField.text) ?? 0.00
-    
-   /// ❤️❤️❤️❤️❤️❤️❤️ unsure what to do with Picker View here!!!!
-//    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-//        return 1
-//    }
-//
-//    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-//       //want to return the number of different line of bets i can take
-//        return 5
-//    }
-//
-    //❤️❤️❤️❤️❤️❤️ here is where you say what the specific games are
-//    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-//        //want to return the specific line in the array of lines
-//        return array[row]
-//    }
-    
 
 
     @IBOutlet weak var placeBetButton: UIButton!
@@ -56,14 +39,6 @@ class PickPostDetailViewController: UIViewController, UIPickerViewDelegate, UIPi
         super.viewDidLoad()
         pickerView.delegate = self
         pickerView.dataSource = self
-//        lines.getData {
-//               print("💡💡💡💡💡💡💡💡💡💡💡💡💡💡💡💡💡💡💡💡")
-//                        DispatchQueue.main.async {
-//                        self.pickPostFeedTableView.reloadData()
-//                        }
-//               print("in viewdidload, this is   linearray: \(self.lines.lineArray)")
-//               print("in viewdidload, this is count of line array: \(self.lines.lineArray.count))")
-//           }
         switcher.isOn = false
        // amountRiskedField.text = "\(0.00)"
      //   amountToWinField.text = "\(0.00)"
@@ -73,31 +48,44 @@ class PickPostDetailViewController: UIViewController, UIPickerViewDelegate, UIPi
         lines.getData {
                      print("💡💡💡💡💡💡💡💡💡💡💡💡💡💡💡💡💡💡💡💡")
                               DispatchQueue.main.async {
-                             // self.pickerView.reloadData()
+                             self.pickerView.reloadAllComponents()
                               }
-                     print("in viewdidload, this is   linearray: \(self.lines.lineArray)")
-                     print("in viewdidload, this is count of line array: \(self.lines.lineArray.count))")
-            print("This is lines.datas!!!! : \(self.lines.datas)") 
-                 }
+                   //  print("in viewdidload, this is   self.lines.datas: \(self.lines.datas)")
+                   //  print("in viewdidload, this is count of line array: 🟡🟡🟡🟡 \(self.lines.datas.count))🟡🟡🟡🟡🟡🟡🟡v🟡")
+          //  print("This is lines.datas!!!! : \(self.lines.datas)")
+            self.gotLinesArray = self.lines.datas
+           // print("This is self.gotLinesArray \(self.gotLinesArray)")
+           // print("This is the got Lines Array after appending: $$$$$$$$$ \(self.gotLinesArray)")
+            for array in self.gotLinesArray {
+                if array.sites.count != 0 {
+                    self.linesWithOdds.append(array)
+                }
+            }
+            print("This is 🎵🎵🎵🎵🎵🎵🎵🎵🎵🎵🎵self.lineswithOdds \(self.linesWithOdds) \(self.linesWithOdds.count)")
+            return self.linesWithOdds
+        }
+      //  print("🟤🟤🟤🟤🟤Now that I am out of the function? do i still have access??????🟤🟤🟤🟤🟤🟤?")
+        //print(self.lines.datas.count)
+  //      print(self.lines.datas)
     
     //amountToWinDecimal = Decimal(amountToWinField.text)
        //amountRiskedDecimal = Decimal(amountRiskedField.text)
         convertDecimalToAmerican(decimal: 2.00)
         convertDecimalToAmerican(decimal: 1.50)
-        convertDecimalToAmerican(decimal: 3.56)
+        convertDecimalToAmerican(decimal: 3.56) 
         convertDecimalToFractional(decimal: 2.00)
         convertDecimalToFractional(decimal: 1.50)
         convertDecimalToFractional(decimal: 3.56)
     }
     
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 1
-    }
-        
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-       //want to return the number of different line of bets i can take
-        return self.lines.lineArray.count
-    }
+//    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+//        return 1
+//    }
+//
+//    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+//       //want to return the number of different line of bets i can take
+//        return self.lines.datas.count
+//    }
     
     
     
@@ -161,7 +149,6 @@ class PickPostDetailViewController: UIViewController, UIPickerViewDelegate, UIPi
         homeMoneLineBool = false
         currentMoneyLine = "\(awayTeamButton.titleLabel!.text!)"
         print("This is the current money line \(currentMoneyLine)")
-        
     }
     
     @IBAction func homeTeamButtonPressed(_ sender: UIButton) {
@@ -233,12 +220,69 @@ class PickPostDetailViewController: UIViewController, UIPickerViewDelegate, UIPi
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     
-        if let newPickPostString = pickerView.accessibilityValue  { //textview.text {
-              newPickPostText = newPickPostString
-              print("new text post: \(newPickPostText)")
-          }
+//        if let newPickPostString = pickerView.accessibilityValue  { //textview.text {
+//              newPickPostText = newPickPostString
+//              print("new text post: \(newPickPostText)")
+//          }
       }
+    
+    
+        func numberOfComponents(in pickerView: UIPickerView) -> Int {
+            print("pickerview 1 component might need to be changed")
+          return  1
+    //        return self.lines.datas.count
+        }
+        
+        func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+            print("pickerview \(self.linesWithOdds.count) number of rows in compoenent might need to be changed")
+            return self.linesWithOdds.count
+        }
+        
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        print("THis is self.linesWithOdds \(self.linesWithOdds)")
+        
+      //      awayTeamButton.titleLabel?.text = "\(self.lines.datas[row].teams[0])"
+        awayTeamButton.titleLabel?.text = "\(self.linesWithOdds[row].teams[0]) @ \(self.linesWithOdds[row].sites[0].odds.h2h.first!)"
+       homeTeamButton.titleLabel?.text = "\(self.linesWithOdds[row].teams[0]) @ \(self.linesWithOdds[row].sites[0].odds.h2h.last!)"
+      //  print("🔘🔘🔘🔘🔘🔘🔘🔘🔘🔘🔘🔘🔘🔘🔘🔘🔘 away odds:  \(self.lines.datas[0].sites[0].odds.h2h.first!)")
+         // print("🔘🔘🔘🔘🔘🔘🔘🔘🔘🔘🔘🔘🔘🔘🔘🔘🔘 home odds:  \(self.lines.datas[0].sites[0].odds.h2h.last!)")
+       // var awayLineDecimal = self.lines.datas[row].sites //[0].odds.h2h.first!
+      //  var homeLineDecimal = self.lines.datas[row].sites //[0].odds.h2h.last!
+       // print("🔄🔄🔄🔄🔄🔄🔄🔄🔄🔄🔄🔄🔄🔄🔄")
+      ///  print(awayLineDecimal)
+      //   print("🔄🔄🔄🔄🔄🔄🔄🔄🔄🔄🔄🔄🔄🔄🔄")
+     //   print(homeLineDecimal)
+        
+  //      awayTeamButton.titleLabel?.text = "\(self.lines.datas[row].teams[0]) at \(awayLineDecimal)"
+           // awayTeamButton.titleLabel?.text = "\(self.lines.datas[row].teams[0]) \(convertDecimalToAmerican(decimal: self.lines.datas[row].sites[0].odds.h2h[0]))"
+     //   homeTeamButton.titleLabel?.text = "\(self.lines.datas[row].teams[1]) at //\(homeLineDecimal)"
+         // homeTeamButton.titleLabel?.text = "\(self.lines.datas[row].teams[1]) \(self.lines.datas[row].sites[0].odds.h2h.last!)"
+      //  print("This is my  self.lines.data 🔜🔜🔜🔜🔜🔜🔜🔜🔜🔜🔜🔜🔜🔜🔜🔜🔜🔜🔜🔜🔜\(self.lines.datas)")
+                //  return "\(self.lines.datas[row])"
+        print(" THis is my first picker view should look like:  \(self.linesWithOdds[row].teams[0]) @ \(self.linesWithOdds[row].teams[1]) : \(self.linesWithOdds[row].sport_nice)")
+       return "\(self.linesWithOdds[row].teams[0]) @ \(self.linesWithOdds[row].teams[1]) : \(self.linesWithOdds[row].sport_nice)"
+         //   return "\(self.lines.datas[row].teams[0]) @ \(self.lines.datas[row].teams[1]): \(self.lines.datas[row].sport_nice)"
+      //     print("This is my  self.lines.data 🔜🔜🔜🔜🔜🔜🔜🔜🔜🔜🔜🔜🔜🔜🔜🔜🔜🔜🔜🔜🔜\(self.lines.datas)")
+          //  return "\(self.lines.datas[row])"
+            
+        //return ("\(self.gotLinesArray[row].teams[0]) @ \(self.gotLinesArray[row].teams[1])")
+            print("🔶🔶🔶🔶🔶🔶🔶🔶🔶🔶🔶🔶🔶🔶🔶🔶🔶🔶🔶🔶🔶🔶🔶🔶🔶🔶🔶🔶🔶🔶🔶🔶🔶🔶🔶🔶")
+            print(self.gotLinesArray)
+           // return "\(self.lines.getData(completed: () -> [gotLinesArray]).row)"
+            //return ("\(self.gotLinesArray) @ \(self.gotLinesArray)")
+       
+        }
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     
     
 }
+

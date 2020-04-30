@@ -11,7 +11,8 @@ import Foundation
 import Foundation
 
 struct APIKeys {
-    static let jsonOddsKey = "21f3240fa00bcfe0a554de3b68c74020"
+  //old key  static let jsonOddsKey = "21f3240fa00bcfe0a554de3b68c74020"
+    static let APIkey = "d71ed9b7c01aadf3e3b885d969634a9c"
   //  static let darkSkyKey = "b94f0875317de54877db4feb06a79295"
     
 }
