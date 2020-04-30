@@ -127,13 +127,15 @@ class PickPostDetailViewController: UIViewController, UIPickerViewDelegate, UIPi
             var newDecimal = decimal - 1.00
             newDecimal = newDecimal*100.00
             print("Old decimal = \(decimal), converted to American: +\(newDecimal)")
-            return "+\(newDecimal)"
+           var newDecimalInt = Int(newDecimal)
+            return "+\(newDecimalInt)"
         }
         else {
                    var newDecimal = decimal - 1.00
                    newDecimal = 100/newDecimal
              print("Old decimal = \(decimal), converted to American: -\(newDecimal)")
-                   return "-\(newDecimal)"
+            var newDecimalInt = Int(newDecimal)
+                   return "-\(newDecimalInt)"
                }
         
     }
@@ -242,8 +244,8 @@ class PickPostDetailViewController: UIViewController, UIPickerViewDelegate, UIPi
         print("THis is self.linesWithOdds \(self.linesWithOdds)")
         
       //      awayTeamButton.titleLabel?.text = "\(self.lines.datas[row].teams[0])"
-        awayTeamButton.titleLabel?.text = "\(self.linesWithOdds[row].teams[0]) @ \(self.linesWithOdds[row].sites[0].odds.h2h.first!)"
-       homeTeamButton.titleLabel?.text = "\(self.linesWithOdds[row].teams[0]) @ \(self.linesWithOdds[row].sites[0].odds.h2h.last!)"
+        awayTeamButton.titleLabel?.text = "\(self.linesWithOdds[row].teams[0]) \(convertDecimalToAmerican(decimal: self.linesWithOdds[row].sites[0].odds.h2h.first!))"
+       homeTeamButton.titleLabel?.text = "\(self.linesWithOdds[row].teams[1]) \(convertDecimalToAmerican(decimal: self.linesWithOdds[row].sites[0].odds.h2h.last!))"
       //  print("🔘🔘🔘🔘🔘🔘🔘🔘🔘🔘🔘🔘🔘🔘🔘🔘🔘 away odds:  \(self.lines.datas[0].sites[0].odds.h2h.first!)")
          // print("🔘🔘🔘🔘🔘🔘🔘🔘🔘🔘🔘🔘🔘🔘🔘🔘🔘 home odds:  \(self.lines.datas[0].sites[0].odds.h2h.last!)")
        // var awayLineDecimal = self.lines.datas[row].sites //[0].odds.h2h.first!
