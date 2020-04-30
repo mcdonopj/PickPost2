@@ -41,6 +41,7 @@ class PickPostTableViewCell: UITableViewCell {
     }
 
     func configureCell(pickPost: PickPost) {
+        print(pickPost)
         usernameLabel.text = pickPost.username
         //chosenTeamLineLabel.text = "\(pickPost.chosenTeam) at \(pickPost.odds)"
         print("I haven't configured game Label yet")
@@ -53,21 +54,6 @@ class PickPostTableViewCell: UITableViewCell {
         agreePickPostLabel.text = "\(pickPost.upVotes)"
         disagreePickPostLabel.text = "\(pickPost.downVotes)"
     }
-    
-    var addingPickPost: PickPost! {
-            didSet{
-                usernameLabel.text = "\(addingPickPost.pickPost?.username)"
-                gameLabel.text = addingPickPost.pickPost?.text // ❤️❤️❤️ Want to set text to "away @ home"
-                startTimeLabel.text = "\(addingPickPost.pickPost?.commenceTime)"
-                timePostedLabel.text = "\(addingPickPost.pickPost?.timePosted)"
-                riskingLabel.text = "\(addingPickPost.pickPost?.amountWagered)"
-                toWinLabel.text = "\(addingPickPost.pickPost?.amountToWin)"
-                agreePickPostLabel.text = "\(addingPickPost.pickPost?.upVotes)"
-                disagreePickPostLabel.text = "\(addingPickPost.pickPost?.downVotes)"
-         //       print("This is textpost.text: \(textPostLabel.text)")
-            }
-        }
-    
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)

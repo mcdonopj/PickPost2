@@ -436,13 +436,15 @@
         <!--Pick Post Detail View Controller-->
         <scene sceneID="lnb-78-I8P">
             <objects>
+                <exit id="jaA-VD-De7" userLabel="Exit" sceneMemberID="exit"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Q1X-Gx-nQ9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <viewController id="iYY-dZ-J2B" customClass="PickPostDetailViewController" customModule="PickPost2" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Uyv-5W-L6U">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="548"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <pickerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bvg-nL-je5">
-                                <rect key="frame" x="0.0" y="24" width="320" height="260"/>
+                                <rect key="frame" x="0.0" y="24" width="320" height="225"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             </pickerView>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="I8W-Pt-wxY">
@@ -459,7 +461,6 @@
                                     <barButtonItem systemItem="cancel" id="bn3-X3-YN8">
                                         <connections>
                                             <action selector="cancelButtonPressed:" destination="iYY-dZ-J2B" id="noa-n8-wrF"/>
-                                            <segue destination="jaA-VD-De7" kind="unwind" unwindAction="unwindFromViewControllerWithSegue:" id="Tlk-TJ-e32"/>
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="sk5-f4-mvT"/>
@@ -492,14 +493,14 @@
                                 <state key="normal" title="Place Bet"/>
                                 <connections>
                                     <action selector="placeBetButtonPressed:" destination="iYY-dZ-J2B" eventType="touchUpInside" id="ugp-ri-BKd"/>
-                                    <segue destination="jaA-VD-De7" kind="unwind" unwindAction="unwindFromViewControllerWithSegue:" id="jHO-ch-bOb"/>
+                                    <segue destination="jaA-VD-De7" kind="unwind" identifier="unwindFromPickPostDetail" unwindAction="unwindFromViewControllerWithSegue:" id="4ld-KA-0Eh"/>
                                 </connections>
                             </button>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hNd-lo-927">
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="0" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hNd-lo-927">
                                 <rect key="frame" x="195" y="387" width="97" height="34"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <textInputTraits key="textInputTraits" enablesReturnKeyAutomatically="YES"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0RB-bV-Gl2">
                                 <rect key="frame" x="195" y="433" width="0.0" height="0.0"/>
@@ -508,10 +509,10 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3a2-Hb-A4P">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3a2-Hb-A4P">
                                 <rect key="frame" x="195" y="433" width="97" height="34"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -519,7 +520,7 @@
                                 <rect key="frame" x="0.0" y="345" width="312" height="34"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                <state key="normal" title="Home Team +YYY"/>
+                                <state key="normal" title="Home Team -YYY"/>
                                 <connections>
                                     <action selector="homeTeamButtonPressed:" destination="iYY-dZ-J2B" eventType="touchUpInside" id="sw8-dj-oqB"/>
                                 </connections>
@@ -528,8 +529,15 @@
                                 <rect key="frame" x="0.0" y="292" width="312" height="45"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                <state key="normal" title="Away Team -XXX"/>
+                                <state key="normal" title="Away Team +XXX"/>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Current Pick:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="978-1R-TCw">
+                                <rect key="frame" x="7" y="257" width="305" height="27"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
@@ -544,14 +552,13 @@
                         <outlet property="amountRiskedField" destination="hNd-lo-927" id="sZl-gg-quF"/>
                         <outlet property="amountToWInLabel" destination="3a2-Hb-A4P" id="rB3-es-IOD"/>
                         <outlet property="awayTeamButton" destination="LJt-cB-F24" id="hNp-Bp-NDP"/>
+                        <outlet property="currentBetLabel" destination="978-1R-TCw" id="8dg-NI-7FC"/>
                         <outlet property="homeTeamButton" destination="ars-rI-zDv" id="MI9-Zi-ABC"/>
                         <outlet property="pickerView" destination="bvg-nL-je5" id="8MN-qt-UeI"/>
                         <outlet property="placeBetButton" destination="nqh-yZ-BJq" id="PIO-6j-a3a"/>
                         <outlet property="switcher" destination="I8W-Pt-wxY" id="S5T-CW-IcI"/>
                     </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Q1X-Gx-nQ9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-                <exit id="jaA-VD-De7" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="1751.25" y="274.64788732394368"/>
         </scene>

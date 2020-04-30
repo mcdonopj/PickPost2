@@ -76,12 +76,15 @@ class PickPosts {
             }
             self.allPickPostsArray = []
             //there are querySnapshot!.documents.count docments in the spots snapshot
+            
             for document in querySnapshot!.documents {
+                print(document)
                 let newPickPost = PickPost(dictionary: document.data())
                 newPickPost.documentID = document.documentID
                 self.allPickPostsArray.append(newPickPost)
-                print("Now here is the all pick posts array: \(self.allPickPostsArray)")
+                print("Loaded: \(newPickPost.toString())")
             }
+
             completed()
         }
         completed()

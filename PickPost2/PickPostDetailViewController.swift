@@ -9,8 +9,14 @@
 import UIKit
 
 class PickPostDetailViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
-
+    var homeTeam: String = ""
+    var awayTeam: String = ""
+    var currentSport: String = ""
+    var currentOddsMultiplierArray: [Double] = []
+    var currentCommenceTime: TimeInterval = 0.0
     var pickPost = PickPost()
+    var homeOrAwayIndexForOdds = 0
+    @IBOutlet weak var currentBetLabel: UILabel!
     var pickPostContent = ""
        var newPickPostText = "fake Pick post text"
     var currentMoneyLine = ""
@@ -98,15 +104,6 @@ class PickPostDetailViewController: UIViewController, UIPickerViewDelegate, UIPi
         return allowedCharacterSet.isSuperset(of: typedCharacterSet)
     }
     
-    
-   // ❤️❤️❤️❤️❤️ Do I need this prepare for segue????
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        if let newPickPostString = pickerView.tex //textview.text {
-//               newPickPostText = newPickPostString
-//               print("new text post: \(newPickPostText)")
-//           }
-//       }
-    
     func leaveViewController() {
   
         if switcher.isOn == false {
@@ -146,11 +143,37 @@ class PickPostDetailViewController: UIViewController, UIPickerViewDelegate, UIPi
               return newFractional
       }
     
+    func updateWinAmount() {
+//        var riskText: String = amountRiskedField.text ?? "0"
+        //var riskInt = Int(riskText)
+var riskField: UITextField = amountRiskedField {
+          didSet {
+            print("amountToWinAmount was called")
+            amountToWInLabel.text = "To Win: \(riskField.text) Multiplied by odds multiplier"
+          }
+        }
+    }
+    
+    
+    
+//    func calculateAmountToWin() {
+//        var scrapIndex = currentMoneyLine.count - 3
+//        print("scrapCurrentMoneyLine \(scrapCurrentMoneyLine)")
+//        for scrapIndex..<currentMoneyLine.count {
+//
+//        }
+//
+//    }
+    
+    
     @IBAction func awayTeamButtonPressed(_ sender: UIButton) {
         awayMoneyLineBool = true
         homeMoneLineBool = false
         currentMoneyLine = "\(awayTeamButton.titleLabel!.text!)"
+        currentBetLabel.text = currentMoneyLine
         print("This is the current money line \(currentMoneyLine)")
+        awayTeamButton.titleLabel!.text = currentBetLabel.text
+        homeOrAwayIndexForOdds = 0
     }
     
     @IBAction func homeTeamButtonPressed(_ sender: UIButton) {
@@ -158,6 +181,10 @@ class PickPostDetailViewController: UIViewController, UIPickerViewDelegate, UIPi
         homeMoneLineBool = true
         currentMoneyLine = "\(homeTeamButton.titleLabel!.text!)"
             print("This is the current money line \(currentMoneyLine)")
+        homeTeamButton.titleLabel!.text = currentMoneyLine
+        currentBetLabel.text = currentMoneyLine
+        homeTeamButton.titleLabel!.text = currentBetLabel.text
+        homeOrAwayIndexForOdds = 1
     }
     
 //    func calculateAmountWin(riskString: String) -> Decimal {
@@ -204,28 +231,23 @@ class PickPostDetailViewController: UIViewController, UIPickerViewDelegate, UIPi
     @IBAction func placeBetButtonPressed(_ sender: UIButton) {
         if switcher.isOn {
             print("switcher is on. So You can try save data.")
-        pickPost.saveData { success in
-            if success {
-                print("XXXXXXXXXXX IM GOING TO LEAVE VIEW CONTROLLER")
-                self.leaveViewController()
-            }
-            else {
-                print("error couldnot leave view controller because data wasnt saved")
-            }
-        }
-    }
-        if switcher.isOn == false {
+            self.leaveViewController()
+        } else {
             print("The swithcer is off. You have to turn it on in order to make a pick")
         }
     }
     
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-    
-//        if let newPickPostString = pickerView.accessibilityValue  { //textview.text {
-//              newPickPostText = newPickPostString
-//              print("new text post: \(newPickPostText)")
-//          }
+        if segue.identifier == "unwindFromPickPostDetail" {
+            /*
+             
+             */
+            let selectedPickerRow = self.pickerView.selectedRow(inComponent: 0)
+            let selectedLine = self.linesWithOdds[selectedPickerRow]
+            
+        }
+        
       }
     
     
@@ -246,6 +268,14 @@ class PickPostDetailViewController: UIViewController, UIPickerViewDelegate, UIPi
       //      awayTeamButton.titleLabel?.text = "\(self.lines.datas[row].teams[0])"
         awayTeamButton.titleLabel?.text = "\(self.linesWithOdds[row].teams[0]) \(convertDecimalToAmerican(decimal: self.linesWithOdds[row].sites[0].odds.h2h.first!))"
        homeTeamButton.titleLabel?.text = "\(self.linesWithOdds[row].teams[1]) \(convertDecimalToAmerican(decimal: self.linesWithOdds[row].sites[0].odds.h2h.last!))"
+        awayTeam = self.linesWithOdds[row].teams[0]
+        homeTeam = self.linesWithOdds[row].teams[1]
+        currentSport = self.linesWithOdds[row].sport_nice
+        currentCommenceTime = self.linesWithOdds[row].commence_time
+        currentOddsMultiplierArray = self.linesWithOdds[row].sites[0].odds.h2h
+        
+        
+            //currentAmountToWin = self.linesWithOdds[row].
       //  print("🔘🔘🔘🔘🔘🔘🔘🔘🔘🔘🔘🔘🔘🔘🔘🔘🔘 away odds:  \(self.lines.datas[0].sites[0].odds.h2h.first!)")
          // print("🔘🔘🔘🔘🔘🔘🔘🔘🔘🔘🔘🔘🔘🔘🔘🔘🔘 home odds:  \(self.lines.datas[0].sites[0].odds.h2h.last!)")
        // var awayLineDecimal = self.lines.datas[row].sites //[0].odds.h2h.first!
