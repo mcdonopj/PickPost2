@@ -14,6 +14,8 @@ import GoogleSignIn
 
 //create an instance of PickPosts like in 2 then use the getData from that class to load all your data into the table view
 class PickPostFeedViewController: UIViewController {
+//    let logoImageView: UIImageView!
+//    let logoImageView.image = UIImage(named: "beatTheBookieLogo1")
     var pickPosts = PickPosts()
     var authUI: FUIAuth!
     var pickPostTextHolder: [String] = []
@@ -72,7 +74,8 @@ class PickPostFeedViewController: UIViewController {
         super.viewWillAppear(animated)
         //   navigationController?.setToolbarHidden(false, animated: false) ❤️❤️❤️
         pickPosts.loadData {
-            self.sortBasedOnSegmentPressed()
+            //🆇🆇🆇🆇🆇🆇🆇🆇🆇🆇🆇🆇🆇🆇🆇🆇🆇🆇🆇
+            //self.sortBasedOnSegmentPressed()
             self.pickPostFeedTableView.reloadData()
         }
     }
@@ -187,24 +190,24 @@ class PickPostFeedViewController: UIViewController {
         
     }
     
+  //🆇🆇🆇🆇🆇🆇🆇🆇🆇🆇🆇🆇🆇🆇🆇🆇🆇 took out sortSegment!
+//    func sortBasedOnSegmentPressed() {
+//        switch sortSegmentControl.selectedSegmentIndex {
+//        case 0: //Popularity
+//            pickPosts.allPickPostsArray.sort(by: {$0.upVotes > $1.upVotes})
+//            //  case 1: //Time????❤️❤️❤️❤️❤️
+//            //     pickPosts.allPickPostsArray.sort(by: {$0.) < $1.)})
+//            //  case 2: // avg rating
+//        //       print("to do")
+//        default:
+//            print("Error")
+//        }
+//        pickPostFeedTableView.reloadData()
+//    }
     
-    func sortBasedOnSegmentPressed() {
-        switch sortSegmentControl.selectedSegmentIndex {
-        case 0: //Popularity
-            pickPosts.allPickPostsArray.sort(by: {$0.upVotes > $1.upVotes})
-            //  case 1: //Time????❤️❤️❤️❤️❤️
-            //     pickPosts.allPickPostsArray.sort(by: {$0.) < $1.)})
-            //  case 2: // avg rating
-        //       print("to do")
-        default:
-            print("Error")
-        }
-        pickPostFeedTableView.reloadData()
-    }
-    
-    @IBAction func sortSegmentPressed(_ sender: UISegmentedControl) {
-        sortBasedOnSegmentPressed()
-    }
+//    @IBAction func sortSegmentPressed(_ sender: UISegmentedControl) {
+//        sortBasedOnSegmentPressed()
+//    }
     
     @IBAction func signOutPressed(_ sender: UIBarButtonItem) {
         do {
@@ -213,7 +216,7 @@ class PickPostFeedViewController: UIViewController {
             pickPostFeedTableView.isHidden = true
             signIn()
         } catch {
-            print("Error. Couldn't sign out")
+            print("🆇🆇🆇 Error. Couldn't sign out")
         }
         
     }
@@ -300,9 +303,15 @@ extension PickPostFeedViewController: UITableViewDelegate, UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let time = getTimeString()
-        let today = getTodayString()
+        var time = getTimeString()
+        var today = getTodayString()
+       
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: "PickPostCell", for: indexPath) as! PickPostTableViewCell
+                      cell.timePostedLabel.text = "\(time)"
+                    //  cell.usernameLabel.text = "\(authUI.auth!.currentUser!.displayName!)"
+            cell.dateLabel.text = "Posted: \(today)"
+        //cell.gameLabel.text = 
         print("Why doesnt is like configure cell? ❤️❤️❤️❤️❤️❤️❤️")
         cell.configureCell(pickPost: pickPosts.allPickPostsArray[indexPath.row])
         /*
@@ -336,8 +345,8 @@ extension PickPostFeedViewController: UITableViewDelegate, UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 140
-        print("I made cell here 140 randomly")
+        return 250
+        print("I made cell here 250 randomly")
     }
     
 }
@@ -369,8 +378,8 @@ extension PickPostFeedViewController: FUIAuthDelegate {
         let imageY = self.view.center.y - imageHeight
         let logoFrame = CGRect(x: self.view.frame.origin.x + marginInsets, y: imageY, width: self.view.frame.width - (2*marginInsets), height: imageHeight)
         let logoImageView = UIImageView(frame: logoFrame)
-        logoImageView.image = UIImage(named: "logo")
-        logoImageView.contentMode = .scaleAspectFit
+         logoImageView.image = UIImage(named: "beatTheBookieLogo1")
+         logoImageView.contentMode = .scaleAspectFit
         loginViewController.view.addSubview(logoImageView)
         return loginViewController
         

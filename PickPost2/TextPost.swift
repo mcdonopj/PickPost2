@@ -62,6 +62,7 @@ class TextPost {
         self.postingUserID = postingUserID1
         //create the dictionary represnting the data we want to save
         let dataToSave = self.dictionary
+        print("This is self.docuementID \(self.documentID)")
         //if we HAVE saved a record, we''ll have a document ID
         if self.documentID != "" {
             let ref = db.collection("textPosts").document(self.documentID)

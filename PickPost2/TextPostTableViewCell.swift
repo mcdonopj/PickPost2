@@ -52,7 +52,7 @@ import UIKit
         today = getTodayString()
         print("Today: \(today)")
         if likedAlready == false {
-            textPost.upVotes = textPost.upVotes + 1
+        textPost.upVotes = textPost.upVotes + 1
             currentLikes = currentLikes + 1
          //   likeLabelTextPost.text = "\(textPost.upVotes)"
               likeLabelTextPost.text = "\(currentLikes)"

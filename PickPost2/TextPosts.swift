@@ -33,9 +33,11 @@ class TextPosts {
                 print("document = \(document)")
                 print("querySnapshot!.documents \(querySnapshot!.documents)")
                 let newTextPost = TextPost(dictionary: document.data())
+               // let newTextPost.textPost = TextPost
             //    let newTextPost = TextPost(text: document.username , time: document.time, postingUserID: document.postingUserID, upVotes: document.upVotes, downVotes: document.downVotes, comments: document.comments, documentID: document.documentID)
              newTextPost.documentID = document.documentID
-                self.allTextPosts.append(newTextPost.textPost!)
+           //     self.allTextPosts.append(newTextPost.textPost!) //I took out ! at end? maybe put back
+             //   self.allTextPosts.append(newTextPost)
              }
              completed()
          }

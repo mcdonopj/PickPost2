@@ -11,6 +11,7 @@ import CoreGraphics
 
 class TextPostDetailViewController: UIViewController {
     var textPost: TextPost!
+    var textPosts = TextPosts()
     @IBOutlet weak var toolBar: UIToolbar!
     @IBOutlet weak var textview: UITextView!
     @IBOutlet weak var commentButton: UIButton!
@@ -32,6 +33,7 @@ class TextPostDetailViewController: UIViewController {
         super.viewDidLoad()
         textview.layer.borderColor = UIColor.black.cgColor
         textview.layer.borderWidth = 1
+      //  textPosts
     }
   
     func leaveViewController() {
@@ -55,6 +57,7 @@ class TextPostDetailViewController: UIViewController {
     @IBAction func postButtonPressed(_ sender: UIBarButtonItem) {
         textPost.saveData { success in
             if success {
+                print("textPost.saveData was a success")
                 self.leaveViewController()
             } else {
                 print("Error couldnt leave this view controller because data wasnt savd")

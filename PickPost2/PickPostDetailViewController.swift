@@ -14,6 +14,7 @@ class PickPostDetailViewController: UIViewController, UIPickerViewDelegate, UIPi
     var currentSport: String = ""
     var currentOddsMultiplierArray: [Double] = []
     var currentCommenceTime: TimeInterval = 0.0
+    var currentMoneyLines: [String] = []
     var pickPost = PickPost()
     var homeOrAwayIndexForOdds = 0
     @IBOutlet weak var currentBetLabel: UILabel!
@@ -46,6 +47,7 @@ class PickPostDetailViewController: UIViewController, UIPickerViewDelegate, UIPi
         pickerView.delegate = self
         pickerView.dataSource = self
         switcher.isOn = false
+        currentBetLabel.text = ""
        // amountRiskedField.text = "\(0.00)"
      //   amountToWinField.text = "\(0.00)"
         if switcher.isOn == false {
@@ -56,12 +58,7 @@ class PickPostDetailViewController: UIViewController, UIPickerViewDelegate, UIPi
                               DispatchQueue.main.async {
                              self.pickerView.reloadAllComponents()
                               }
-                   //  print("in viewdidload, this is   self.lines.datas: \(self.lines.datas)")
-                   //  print("in viewdidload, this is count of line array: 🟡🟡🟡🟡 \(self.lines.datas.count))🟡🟡🟡🟡🟡🟡🟡v🟡")
-          //  print("This is lines.datas!!!! : \(self.lines.datas)")
             self.gotLinesArray = self.lines.datas
-           // print("This is self.gotLinesArray \(self.gotLinesArray)")
-           // print("This is the got Lines Array after appending: $$$$$$$$$ \(self.gotLinesArray)")
             for array in self.gotLinesArray {
                 if array.sites.count != 0 {
                     self.linesWithOdds.append(array)
@@ -70,12 +67,7 @@ class PickPostDetailViewController: UIViewController, UIPickerViewDelegate, UIPi
             print("This is 🎵🎵🎵🎵🎵🎵🎵🎵🎵🎵🎵self.lineswithOdds \(self.linesWithOdds) \(self.linesWithOdds.count)")
             return self.linesWithOdds
         }
-      //  print("🟤🟤🟤🟤🟤Now that I am out of the function? do i still have access??????🟤🟤🟤🟤🟤🟤?")
-        //print(self.lines.datas.count)
-  //      print(self.lines.datas)
-    
-    //amountToWinDecimal = Decimal(amountToWinField.text)
-       //amountRiskedDecimal = Decimal(amountRiskedField.text)
+ 
         convertDecimalToAmerican(decimal: 2.00)
         convertDecimalToAmerican(decimal: 1.50)
         convertDecimalToAmerican(decimal: 3.56) 
@@ -84,16 +76,48 @@ class PickPostDetailViewController: UIViewController, UIPickerViewDelegate, UIPi
         convertDecimalToFractional(decimal: 3.56)
     }
     
-//    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-//        return 1
-//    }
-//
-//    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-//       //want to return the number of different line of bets i can take
-//        return self.lines.datas.count
-//    }
-    
-    
+    func getTodayString() -> String{
+         
+         let date = Date()
+         let calender = Calendar.current
+         let components = calender.dateComponents([.year,.month,.day,.hour,.minute,.second], from: date)
+         
+         let year = components.year
+         let month = components.month
+         let day = components.day
+         let hour = components.hour
+         let minute = components.minute
+         let second = components.second
+         
+         let today_string = String(year!) + "-" + String(month!) + "-" + String(day!)
+         
+         return today_string
+         
+     }
+     
+     
+     func getTimeString() -> String{
+         
+         let date = Date()
+         let calender = Calendar.current
+         let components = calender.dateComponents([.hour,.minute,.second], from: date)
+         
+         let hour = components.hour
+         let minute = components.minute
+         let second = components.second
+         
+         
+         var ampm = ""
+         if hour! < 12 {
+             ampm = " AM"
+         } else {
+             ampm = " PM"
+         }
+         let time_string =  String(hour!)  + ":" + String(minute!) + ampm
+         
+         return time_string
+         
+     }
     
     func amountRiskedTextField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         let allowedCharacters = "+123567890"
@@ -169,31 +193,25 @@ var riskField: UITextField = amountRiskedField {
     @IBAction func awayTeamButtonPressed(_ sender: UIButton) {
         awayMoneyLineBool = true
         homeMoneLineBool = false
-        currentMoneyLine = "\(awayTeamButton.titleLabel!.text!)"
+        currentMoneyLine = currentMoneyLines[0]
+        //currentMoneyLine = "\(awayTeamButton.titleLabel!.text!)"
         currentBetLabel.text = currentMoneyLine
         print("This is the current money line \(currentMoneyLine)")
-        awayTeamButton.titleLabel!.text = currentBetLabel.text
+      //  awayTeamButton.titleLabel!.text = currentBetLabel.text
         homeOrAwayIndexForOdds = 0
     }
     
     @IBAction func homeTeamButtonPressed(_ sender: UIButton) {
         awayMoneyLineBool = false
         homeMoneLineBool = true
-        currentMoneyLine = "\(homeTeamButton.titleLabel!.text!)"
+        currentMoneyLine = currentMoneyLines[1]
+        //currentMoneyLine = "\(homeTeamButton.titleLabel!.text!)"
             print("This is the current money line \(currentMoneyLine)")
         homeTeamButton.titleLabel!.text = currentMoneyLine
         currentBetLabel.text = currentMoneyLine
-        homeTeamButton.titleLabel!.text = currentBetLabel.text
+        //homeTeamButton.titleLabel!.text = currentBetLabel.text
         homeOrAwayIndexForOdds = 1
     }
-    
-//    func calculateAmountWin(riskString: String) -> Decimal {
-//        var riskString = amountRiskedField.text ?? "0.00"
-//        var riskDecimal = Float(riskString)
-//        print("riskDecimal: \(riskDecimal)!!!!!!")
-//     //   riskDecimal*
-//
- //   }
     
     func calculateAmountToWin(decimal: Double) -> Double {
         var winAmount = 0.00
@@ -212,8 +230,10 @@ var riskField: UITextField = amountRiskedField {
         print("Swithcer pressed. Now switcher on? : \(switcher.isOn)")
         if switcher.isOn {
             placeBetButton.isEnabled = true
+            placeBetButton.titleLabel!.textColor = .systemBlue
         } else {
-            placeBetButton.isEnabled = false 
+            placeBetButton.isEnabled = false
+              placeBetButton.titleLabel!.textColor = .lightGray
         }
       }
 
@@ -274,24 +294,10 @@ var riskField: UITextField = amountRiskedField {
         currentCommenceTime = self.linesWithOdds[row].commence_time
         currentOddsMultiplierArray = self.linesWithOdds[row].sites[0].odds.h2h
         
-        
-            //currentAmountToWin = self.linesWithOdds[row].
-      //  print("🔘🔘🔘🔘🔘🔘🔘🔘🔘🔘🔘🔘🔘🔘🔘🔘🔘 away odds:  \(self.lines.datas[0].sites[0].odds.h2h.first!)")
-         // print("🔘🔘🔘🔘🔘🔘🔘🔘🔘🔘🔘🔘🔘🔘🔘🔘🔘 home odds:  \(self.lines.datas[0].sites[0].odds.h2h.last!)")
-       // var awayLineDecimal = self.lines.datas[row].sites //[0].odds.h2h.first!
-      //  var homeLineDecimal = self.lines.datas[row].sites //[0].odds.h2h.last!
-       // print("🔄🔄🔄🔄🔄🔄🔄🔄🔄🔄🔄🔄🔄🔄🔄")
-      ///  print(awayLineDecimal)
-      //   print("🔄🔄🔄🔄🔄🔄🔄🔄🔄🔄🔄🔄🔄🔄🔄")
-     //   print(homeLineDecimal)
-        
-  //      awayTeamButton.titleLabel?.text = "\(self.lines.datas[row].teams[0]) at \(awayLineDecimal)"
-           // awayTeamButton.titleLabel?.text = "\(self.lines.datas[row].teams[0]) \(convertDecimalToAmerican(decimal: self.lines.datas[row].sites[0].odds.h2h[0]))"
-     //   homeTeamButton.titleLabel?.text = "\(self.lines.datas[row].teams[1]) at //\(homeLineDecimal)"
-         // homeTeamButton.titleLabel?.text = "\(self.lines.datas[row].teams[1]) \(self.lines.datas[row].sites[0].odds.h2h.last!)"
-      //  print("This is my  self.lines.data 🔜🔜🔜🔜🔜🔜🔜🔜🔜🔜🔜🔜🔜🔜🔜🔜🔜🔜🔜🔜🔜\(self.lines.datas)")
-                //  return "\(self.lines.datas[row])"
         print(" THis is my first picker view should look like:  \(self.linesWithOdds[row].teams[0]) @ \(self.linesWithOdds[row].teams[1]) : \(self.linesWithOdds[row].sport_nice)")
+        awayTeamButton.titleLabel?.text = "\(self.linesWithOdds[row].teams[0]) \(convertDecimalToAmerican(decimal: self.linesWithOdds[row].sites[0].odds.h2h.first!))"
+              homeTeamButton.titleLabel?.text = "\(self.linesWithOdds[row].teams[1]) \(convertDecimalToAmerican(decimal: self.linesWithOdds[row].sites[0].odds.h2h.last!))"
+        currentMoneyLines = ["\(self.linesWithOdds[row].teams[0]) \(convertDecimalToAmerican(decimal: self.linesWithOdds[row].sites[0].odds.h2h.first!))", "\(self.linesWithOdds[row].teams[1]) \(convertDecimalToAmerican(decimal: self.linesWithOdds[row].sites[0].odds.h2h.last!))"]
        return "\(self.linesWithOdds[row].teams[0]) @ \(self.linesWithOdds[row].teams[1]) : \(self.linesWithOdds[row].sport_nice)"
          //   return "\(self.lines.datas[row].teams[0]) @ \(self.lines.datas[row].teams[1]): \(self.lines.datas[row].sport_nice)"
       //     print("This is my  self.lines.data 🔜🔜🔜🔜🔜🔜🔜🔜🔜🔜🔜🔜🔜🔜🔜🔜🔜🔜🔜🔜🔜\(self.lines.datas)")

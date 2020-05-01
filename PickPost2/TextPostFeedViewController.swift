@@ -13,6 +13,7 @@ import FirebaseUI
 import GoogleSignIn
 
 class TextPostFeedViewController: UIViewController, FUIAuthDelegate, UIPageViewControllerDelegate {
+    let logoImageView = UIImage(named: "beatTheBookieLogo1")
     private var pageViewController: UIPageViewController!
     private lazy var viewControllers: [UIViewController] = {
     var viewControllers = [UIViewController]()
@@ -44,30 +45,36 @@ class TextPostFeedViewController: UIViewController, FUIAuthDelegate, UIPageViewC
         authUI?.delegate = self
           textFeedTableView.dataSource = self
           textFeedTableView.delegate = self
-        textPosts = TextPosts()
+//        textPosts = TextPosts()
+//        textPosts.loadData {
+//            print("😎😎😎😎😎😎😎😎😎😎")
+//                       DispatchQueue.main.async {
+//                           self.textFeedTableView.reloadData()
+//                       }
+//        }
       }
 
       override func viewWillAppear(_ animated: Bool) {
           super.viewWillAppear(animated)
           navigationController?.setToolbarHidden(false, animated: false)
         print("I am just beofre textposts.load data")
-        textPosts.loadData {
-            print("I am inside textposts.load data")
-            DispatchQueue.main.async {
-                 self.sortBasedOnSegmentPressed()
-                self.textFeedTableView.reloadData()
-            }
-//             self.sortBasedOnSegmentPressed()
-//             self.textFeedTableView.reloadData()
-            print("I am about to leave textPosts.loadData")
-                }
-        
+//        textPosts.loadData {
+//            print("I am inside textposts.load data")
+//            DispatchQueue.main.async {
+//                 self.sortBasedOnSegmentPressed()
+//                self.textFeedTableView.reloadData()
+//            }
+////             self.sortBasedOnSegmentPressed()
+////             self.textFeedTableView.reloadData()
+//            print("I am about to leave textPosts.loadData")
+//                }
+//        
         
         
         
    //         ❤️❤️❤️❤️❤️ textPostarray.loaddata!!!!
         textPosts.loadData { //Think I just want to load pick posts first, then try to do it with (all) posts.   Should I do pickPostArray.load data? or is this good?
-              self.sortBasedOnSegmentPressed()
+       //       self.sortBasedOnSegmentPressed()
               self.textFeedTableView.reloadData()
           }
          }
@@ -124,25 +131,25 @@ print("I recognized the swipe")
         print("Im IN THE CREATE POST PREssed!")
     }
     
-    func sortBasedOnSegmentPressed() {
-           switch sortSegmentControl.selectedSegmentIndex {
-           case 0: //Popularity
-            textPosts.allTextPosts.sort(by: {$0.upVotes > $1.upVotes})
-         //  case 1: //Time????❤️❤️❤️❤️❤️
-          //     pickPosts.allPickPostsArray.sort(by: {$0.) < $1.)})
-         //  case 2: // avg rating
-        //       print("to do")
-           default:
-               print("Error")
-           }
-           textFeedTableView.reloadData()
-       }
+//    func sortBasedOnSegmentPressed() {
+//           switch sortSegmentControl.selectedSegmentIndex {
+//           case 0: //Popularity
+//            textPosts.allTextPosts.sort(by: {$0.upVotes > $1.upVotes})
+//         //  case 1: //Time????❤️❤️❤️❤️❤️
+//          //     pickPosts.allPickPostsArray.sort(by: {$0.) < $1.)})
+//         //  case 2: // avg rating
+//        //       print("to do")
+//           default:
+//               print("Error")
+//           }
+//           textFeedTableView.reloadData()
+//       }
        
     
     
-       @IBAction func sortSegmentPressed(_ sender: UISegmentedControl) {
-           sortBasedOnSegmentPressed()
-       }
+//       @IBAction func sortSegmentPressed(_ sender: UISegmentedControl) {
+//           sortBasedOnSegmentPressed()
+//       }
        func getTodayString() -> String{
 
            let date = Date()
@@ -206,7 +213,8 @@ print("I recognized the swipe")
                     addingTextPost = TextPostData(text: senderVC.newTextPostText, time: TimeInterval(), postingUserID: "fake username 2", upVotes: 0, downVotes: 0, comments: [])
                    // addingTextPost = TextPostData(text: senderVC.newTextPostText, time: TimeInterval(), username: "fake username", upVotes: 0, downVotes: 0, comments: 0)
                  //   textPostArray.append(addingTextPost)
-                    textPostArray.append(addingTextPost)
+//i put it at beginning instead        // textPostArray.append(addingTextPost)
+                    textPostArray.insert(addingTextPost, at: 0)
 
             }
         }
@@ -331,17 +339,18 @@ extension TextPostFeedViewController {
          return textPostArray.count //AFTER LOADING YOUR POSTS! ❤️❤️❤️❤️❤️
       }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 170
+        return 150
     }
     
       func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         today = getTodayString()
         time = getTimeString()
-              let cell = tableView.dequeueReusableCell(withIdentifier: "TextPostCell", for: indexPath) as! TextPostTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "TextPostCell", for: indexPath) as! TextPostTableViewCell
         cell.timeLabel.text = "\(time!)"
         print("↘️↘️↘️↘️↘️↘️↘️↘️↘️↘️↘️↘️ below is photoURL")
-        print(authUI.auth!.currentUser!.photoURL)
+       // print(authUI.auth!.currentUser!.photoURL)
         cell.usernameLabel.text = "\(authUI.auth!.currentUser!.displayName!)"
+        cell.datePostedLabel.text = "Posted: \(textPostArray[indexPath.row].time)"
         cell.datePostedLabel.text = "Posted: \(today!)"
         cell.likeLabelTextPost.text = "\(textPostArray[indexPath.row].upVotes)"
         cell.dislikeLabelTextPost.text = "\(textPostArray[indexPath.row].downVotes)"
